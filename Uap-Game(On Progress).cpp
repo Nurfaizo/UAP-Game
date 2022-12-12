@@ -10,7 +10,8 @@ bool play=false;
 string pedol[2]={"dor","click"};
 
 void judul(); 
-void pilih(); 
+void pilih1(); 
+void pilih2();
 void menu();
 void gen_pel();
 void gen_pedol();
@@ -18,18 +19,19 @@ void tembak();
 void loading();
 void judul(){
 	cout<<"\n\n\n\n\n\n";
-	cout<<"\t\t\t\t ___________________________________________________________";
-	cout<<"\t\t\t\t|                                                           |";
-	cout<<"\t\t\t\t|      _______       __       _       __                    |";
-	cout<<"\t\t\t\t|     |  ____ \     |  |     | |     |  |           /\      |";
-	cout<<"\t\t\t\t|     |  |  |  \    |  |     | |     |  |          |  |     |";
-	cout<<"\t\t\t\t|     |  |__/  /    |  |     | |     |  |          /  \     |";
-	cout<<"\t\t\t\t|     |       /     |  \     / |     |  |         |    |    |";
-	cout<<"\t\t\t\t|     |  | \  \      \  \___/ /      |  |______  |      |   |";
-	cout<<"\t\t\t\t|     |  |  \  \      \ ____ /       |_________| |      |   |";
-	cout<<"\t\t\t\t|                                                           |";
-	cout<<"\t\t\t\t|                    BY : ODINUR                            |";
-	cout<<"\t\t\t\t|___________________________________________________________|";
+	cout<<"\t\t\t\t -----------------------------------------------------------"<<endl;
+	cout<<"\t\t\t\t|                                                           |"<<endl;
+	cout<<"\t\t\t\t|      _______       __       _       __                    |"<<endl;
+	cout<<"\t\t\t\t|     |  ____ \\     |  |     | |     |  |           /\\      |"<<endl;
+	cout<<"\t\t\t\t|     |  |  |  \\    |  |     | |     |  |          |  |     |"<<endl;
+	cout<<"\t\t\t\t|     |  |__/  /    |  |     | |     |  |          /  \\     |"<<endl;
+	cout<<"\t\t\t\t|     |       /     |  \\     / |     |  |         |    |    |"<<endl;
+	cout<<"\t\t\t\t|     |  | \\  \\      \\  \\___/ /      |  |______  |      |   |"<<endl;
+	cout<<"\t\t\t\t|     |  |  \\  \\      \\ ____ /       |_________| |      |   |"<<endl;
+	cout<<"\t\t\t\t|                                                           |"<<endl;
+	cout<<"\t\t\t\t|                    BY : ODINUR                            |"<<endl;
+	cout<<"\t\t\t\t|                                                           |"<<endl;
+	cout<<"\t\t\t\t -----------------------------------------------------------"<<endl;
 	
 }
 void menu(){
@@ -40,6 +42,8 @@ void menu(){
 	pilih();
 }
 void pilih(){
+	char movement=getch();
+	if()
 	
 }
 void tips1(){
@@ -99,5 +103,4 @@ void solo(){
 	
 }
 int main(){
-	loading();
 }
