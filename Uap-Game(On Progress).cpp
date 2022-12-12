@@ -2,86 +2,102 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <windows.h>
-
-#define SCREEN_WIDTH 100
-#define SCREEN_Height 30
-#define Win_width 80
-#define GAP_SIZE 7
-#define Enemy_dif 45
- 
+#include <time.h>
 using namespace std;
-HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-COORD Cursorposition;
-int pilih;
-int enemyx[2];
-int enemyt[2];
-int enemyflag[2];
-bool play =false;
-int x=1,y=1;
+int musuh,player,total1,total2;
+char balik;
+bool play=false;
+string pedol[2]={"dor","click"};
 
-
-/*fungsi untuk mngeluarkan loading*/
-void Loading(){
-	initscr();
-	mvprintw(15,50,"Memuat");
-	refresh();
-	for(int a =0;a<119;a++){
-		mvprintw(16,a,"|");
-		refresh();
-		Sleep(50);
-	}
-	endwin();
-		
-
+void judul(); 
+void pilih(); 
+void menu();
+void gen_pel();
+void gen_pedol();
+void tembak();
+void loading();
+void judul(){
+	cout<<"\n\n\n\n\n\n";
+	cout<<"\t\t\t\t ___________________________________________________________";
+	cout<<"\t\t\t\t|                                                           |";
+	cout<<"\t\t\t\t|      _______       __       _       __                    |";
+	cout<<"\t\t\t\t|     |  ____ \     |  |     | |     |  |           /\      |";
+	cout<<"\t\t\t\t|     |  |  |  \    |  |     | |     |  |          |  |     |";
+	cout<<"\t\t\t\t|     |  |__/  /    |  |     | |     |  |          /  \     |";
+	cout<<"\t\t\t\t|     |       /     |  \     / |     |  |         |    |    |";
+	cout<<"\t\t\t\t|     |  | \  \      \  \___/ /      |  |______  |      |   |";
+	cout<<"\t\t\t\t|     |  |  \  \      \ ____ /       |_________| |      |   |";
+	cout<<"\t\t\t\t|                                                           |";
+	cout<<"\t\t\t\t|                    BY : ODINUR                            |";
+	cout<<"\t\t\t\t|___________________________________________________________|";
 	
 }
-void gotoxy(int x){
-	Cursorposition.X = x;
-	SetConsoleCursorPosition(console, Cursorposition);
+void menu(){
+	judul();
+	cout<<"\n\t\t\t\t\t\t  1.Play ";
+	cout<<"\n\t\t\t\t\t\t  2.Tips ";
+	cout<<"\n\t\t\t\t\t\t  3.Quit ";
+	pilih();
 }
-void gen_musuh(int ind){
-	enemyt[ind]=3+rand()%(Win_width-10);
-}
-void musuh(int ind){
+void pilih(){
 	
 }
-void game(){
-	while(1){
-		
-	}
-	
+void tips1(){
+	mvprintw(10,55,"PS");
+	mvprintw(11,35,"Game ini berdasarkan dari game COD operasi hitam");
+	mvprintw(12,43,"Pada saat scene mason di gulag");
 }
-void hoto(){
-	
-}
-void hal1(){//halaman utama game
+void loading(){
 	initscr();
 	clear();
-	mvprintw(10,5,"1. Start Game");
-	mvprintw(11,5,"2. How To Play");
-	mvprintw(12,5,"3. Exit");
+	tips1();
+	for(int y=0;y<3;y++){
+	mvprintw(26,100,"Loading...");
+	mvprintw(27,100, "-------------------");
+	mvprintw(28,100, "|                 |");
+	mvprintw(29,100, "-------------------");
+	for(int f=1;f<17;f++){
+		mvprintw(28,100+f,">>");
 	refresh();
-	getch();
+	Sleep(200);
+	}
+}
 	endwin();
 }
-void hal2(){
-	hal1();
-	char movement = getch();
-		if(movement=='1') {
-			system("cls");
-			Loading();
-		}
-		else if(movement=='2') {
-				Loading();	
-			}
-		else if( movement=='3'){
-				exit(0);
-		}
+
+void gen_pel(){//untuk memutar selongsong revolver sehingga peluru berada pada selongsong acak
+	int peluru;
+	srand(time(0));
+	peluru=(rand()%6);
+	total1=peluru;
+}
+void gen_pedol(){
+	int roulete;
+	srand(time(0));
+	roulete=(rand()%5)+1;
+	total2=roulete;
+}
+void tembak(){
+	gen_pedol();
+	gen_pel();
+	if(total1==total2){
+		cout<<pedol[0];
+		cout<<"Kamu Sudah Mati Welcome To Isekai Waga Yuusha ";
+		
 	}
-
-
-int main(){
-	Loading();
-	hal2();
+	else{
+		cout<<pedol[1]<<endl;
+		cout<<"Yeay Peluru tidak dimuntahkan oleh pistol";
+		cout<<"Mau Coba Lagi?";
+		
+	}
+}
+void solo(){
+	cout<<"Silahkan melakukan penembakan";
+	system("pause");
+	tembak();
 	
+}
+int main(){
+	loading();
 }
