@@ -10,6 +10,8 @@ bool play=false;
 string pedol[2]={"dor","click"};
 
 void judul(); 
+void submenu();
+void tips2();
 void pilih1(); 
 void pilih2();
 void menu();
@@ -36,20 +38,48 @@ void judul(){
 }
 void menu(){
 	judul();
-	cout<<"\n\t\t\t\t\t\t  1.Play ";
-	cout<<"\n\t\t\t\t\t\t  2.Tips ";
-	cout<<"\n\t\t\t\t\t\t  3.Quit ";
-	pilih();
+	cout<<"\n\t\t\t\t\t\t\t  1.Play ";
+	cout<<"\n\t\t\t\t\t\t\t  2.Tips ";
+	cout<<"\n\t\t\t\t\t\t\t  3.Quit \n";
+	pilih1();
 }
-void pilih(){
-	char movement=getch();
-	if()
+void pilih1(){
+	char movement;
+	cout<<"\t\t\t\t\t\t\t  ";
+	cin>>movement;
+	if(movement=='1'){
+		submenu();
+	}
+	else if(movement=='2'){
+		tips2();
+	}
+	else if(movement=='3'){
+		exit(0);
+	}
+	else{
+		cout<<"input anda salah";
+	}	
+}
+void submenu(){
+	system("cls");
+	judul();
+	cout<<"\n\t\t\t\t\t\t\t  Game Mode ";
+	cout<<"\n\t\t\t\t\t\t\t1.Single Player ";
+	cout<<"\n\t\t\t\t\t\t\t2.Multi  Player ";
 	
 }
 void tips1(){
 	mvprintw(10,55,"PS");
 	mvprintw(11,35,"Game ini berdasarkan dari game COD operasi hitam");
 	mvprintw(12,43,"Pada saat scene mason di gulag");
+}
+void tips2(){
+	initscr();
+	system("cls");
+	mvprintw(10,55,"Tips");
+	mvprintw(11,35,"Game ini hanya memerlukan beberapa tombol untuk berjalan");
+	mvprintw(12,43,"Dan anda yang bermain tidak perlu memikirkan hal lain");
+	endwin();
 }
 void loading(){
 	initscr();
@@ -103,4 +133,5 @@ void solo(){
 	
 }
 int main(){
+	menu();
 }
