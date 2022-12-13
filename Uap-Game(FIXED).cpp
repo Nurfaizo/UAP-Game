@@ -6,10 +6,13 @@
 using namespace std;
 int musuh,player,total1,total2;
 char balik;
-bool play=false;
+int movement;
+bool gameover=false;
 string pedol[2]={"dor","click"};
 
-void judul(); 
+void judul();
+void multi();
+void solo(); 
 void submenu();
 void tips2();
 void pilih1(); 
@@ -19,6 +22,18 @@ void gen_pel();
 void gen_pedol();
 void tembak();
 void loading();
+void quit(){
+	system("cls");
+	cout<<"\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t Terima Kasih Telah Mencoba game ini"<<endl;
+	cout<<"\t\t\t\t\t\t  /\\__/\\ \n";
+	cout<<"\t\t\t\t\t\t (  • w •) \n";
+	cout<<"\t\t\t\t\t\t /  ) Thanks\n";
+	system("pause");
+}
+int main(){
+	system("cls");
+	menu();
+}
 void judul(){
 	cout<<"\n\n\n\n\n\n";
 	cout<<"\t\t\t\t -----------------------------------------------------------"<<endl;
@@ -37,28 +52,29 @@ void judul(){
 	
 }
 void menu(){
+	do{
 	judul();
 	cout<<"\n\t\t\t\t\t\t\t  1.Play ";
 	cout<<"\n\t\t\t\t\t\t\t  2.Tips ";
 	cout<<"\n\t\t\t\t\t\t\t  3.Quit \n";
 	pilih1();
+	}while(movement>=1&&movement<4);
 }
 void pilih1(){
-	char movement;
 	cout<<"\t\t\t\t\t\t\t  ";
 	cin>>movement;
-	if(movement=='1'){
-		submenu();
+	switch(movement){
+		case 1:
+			submenu();
+		case 2:
+			tips2();
+		case 3:
+			quit();
+			exit(0);
+		default:
+			system("cls");
+			cout<<"pilihan tidak ada";
 	}
-	else if(movement=='2'){
-		tips2();
-	}
-	else if(movement=='3'){
-		exit(0);
-	}
-	else{
-		cout<<"input anda salah";
-	}	
 }
 void submenu(){
 	system("cls");
@@ -66,7 +82,14 @@ void submenu(){
 	cout<<"\n\t\t\t\t\t\t\t  Game Mode ";
 	cout<<"\n\t\t\t\t\t\t\t1.Single Player ";
 	cout<<"\n\t\t\t\t\t\t\t2.Multi  Player ";
-	
+	char movement1;
+	cin>>movement1;
+	if(movement1=='1'){
+		solo();
+	}
+	else if(movement1=='2'){
+		multi();
+	}
 }
 void tips1(){
 	mvprintw(10,55,"PS");
@@ -74,12 +97,15 @@ void tips1(){
 	mvprintw(12,43,"Pada saat scene mason di gulag");
 }
 void tips2(){
-	initscr();
 	system("cls");
-	mvprintw(10,55,"Tips");
+	initscr();
+	mvprintw(10,58,"Tips");
 	mvprintw(11,35,"Game ini hanya memerlukan beberapa tombol untuk berjalan");
-	mvprintw(12,43,"Dan anda yang bermain tidak perlu memikirkan hal lain");
+	mvprintw(12,37,"Dan anda yang bermain tidak perlu memikirkan hal lain");
+	refresh();
+	getch();
 	endwin();
+	menu();
 }
 void loading(){
 	initscr();
@@ -111,27 +137,86 @@ void gen_pedol(){
 	roulete=(rand()%5)+1;
 	total2=roulete;
 }
+void tembak2(){
+	gen_pel();
+	gen_pedol();
+}
+void multi(){
+	char fire;
+	loading();
+	do{
+		system("cls");
+		for(int player=1;player<3;player++){
+			
+			cout<<"Player "<<player<<"\n silahkan gunakan giliran anda (t/T)\n";
+			cin>>fire;
+			if(fire=='t'||fire=='T'){
+			tembak2();
+				if(total1==total2){
+					cout<<"DOR";
+					cout<<"\nPlayer "<<player<<"Has been eliminated\n";
+					if(player==1){
+						cout<<"Player 2 WINS\n";
+						system("pause");
+						gameover=true;
+					}
+					else if(player==2){
+						cout<<"player 1 Wins\n";
+						system("pause");
+						gameover=true;
+					}	
+			}else{
+				cout<<"Click\n";
+				system("pause");
+			}
+			}
+			else{
+				cout<<"giliran anda terlewat";
+			}
+		
+		}
+	}while(gameover==false);
+	main();
+}
 void tembak(){
 	gen_pedol();
 	gen_pel();
 	if(total1==total2){
 		cout<<pedol[0];
-		cout<<"Kamu Sudah Mati Welcome To Isekai Waga Yuusha ";
+		cout<<"\nKamu Sudah Mati Welcome To Isekai Waga Yuusha\n";
+		cout<<"anda akan kembali ke menu\n";
+		system("pause");
+		gameover=true;
 		
 	}
 	else{
 		cout<<pedol[1]<<endl;
-		cout<<"Yeay Peluru tidak dimuntahkan oleh pistol";
+		cout<<"Selongsong sedang kosong\n";
 		cout<<"Mau Coba Lagi?";
+		cin>>balik;
+		if(balik=='g'||balik=='G'){
+			gameover=true;
+		}
+		else{
+			cout<<"oke";
+		}
 		
 	}
 }
 void solo(){
-	cout<<"Silahkan melakukan penembakan";
-	system("pause");
+	loading();
+	do{
+	system("cls");
+	cout<<"Tarik Pelatuk (Tekan T/t)\n";
+	char choice;
+	cin>>choice;
+	if(choice=='t'||choice=='T'){
 	tembak();
-	
-}
-int main(){
-	menu();
+    }
+    else{
+    	cout<<"Tekan T untuk Menembak";
+    	getch();
+	}
+}while(gameover==false);
+main();
 }
